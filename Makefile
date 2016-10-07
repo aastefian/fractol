@@ -34,6 +34,8 @@ OBJ =	main.o \
 		mandelbrot_handlers.o \
 		mandelbrot_handlers_2.o \
 
+LOBJ = $(LIBFTDIR)/*.o
+
 SOURCE = $(SRCDIR)/main.c \
 		 $(SRCDIR)/extra.c \
 		 $(SRCDIR)/extra2.c \
@@ -54,6 +56,8 @@ SOURCE = $(SRCDIR)/main.c \
 		 $(SRCDIR)/burningship_handlers_2.c \
 		 $(SRCDIR)/mandelbrot_handlers.c \
 		 $(SRCDIR)/mandelbrot_handlers_2.c \
+
+LSOURCE = $(LIBFTDIR)/libft.a
 
 OFLAGS = -Wall -Werror -Wextra
 
@@ -107,14 +111,14 @@ $(NAME): $(LIBFT) $(MLXLIB) $(OBJ) $(COBJ)
 
 $(LIBFT):
 	@echo "--Compiling libft--------"
-	@make re -C $(LIBFTDIR)
+	@echo "--Compiling mlx-lib------"
+	@make -C $(LIBFTDIR)
 
 $(COBJ):
 	@echo "--Compiling CUDA sources-"
 	@nvcc $(NVCC_C) $(NVCC_ARCH) $(NVCC_STD) $(NVCC_VCODE) $(NVCC_FLAGS) -I $(CUDA)/include -I header -I $(CUDAHDR) -c $(CSRC)
 
 $(MLXLIB):
-	@echo "--Compiling mlx-lib------"
 	@make -C $(MLXDIR)
 
 $(OBJ):
@@ -122,10 +126,10 @@ $(OBJ):
 
 clean:
 	@echo "--Cleanning leftovers----"
-	@rm -f $(OBJ) $(COBJ)
+	@rm -f $(OBJ) $(COBJ) $(LOBJ)
 
 fclean: clean
-	@echo "--Cleanning executable---"
-	@rm -f $(NAME)
+	@echo "--Cleanning executables--"
+	@rm -f $(NAME) $(LSOURCE)
 
 re: fclean all
