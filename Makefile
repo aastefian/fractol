@@ -74,7 +74,7 @@ NVCC_FRAMEWORK = -Xlinker -framework,OpenGL -Xlinker -framework,AppKit
 NVCC_LIB = -Xlinker -rpath -Xlinker /Developer/NVIDIA/CUDA-7.5/lib
 NVCC_ARCH = -Xcompiler -arch -Xcompiler x86_64
 NVCC_STD = -Xcompiler -stdlib=libstdc++
-NVCC_VCODE = -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30
+NVCC_VCODE =
 NVCC_FLAGS = -Xcompiler -Werror -Xcompiler -Wall -Xcompiler -Wextra 
 
 all: $(NAME)
